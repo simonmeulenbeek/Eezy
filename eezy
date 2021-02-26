@@ -15,7 +15,7 @@ initialize() {
 	fi
 	echo "Initializing current directory as an Eezy folder."
 	mkdir $EEZY_FOLDER
-	echo "Finished initializing. Start adding tasks by using '$0 add-task name-of-new-task'."
+	echo "Finished initializing. Start adding tasks by using 'eezy add-task name-of-new-task'."
 	echo "Or use 'eezy help' for more information."
 	exit 0
 }
@@ -48,7 +48,7 @@ edit_task() {
 		error
 	fi
 	local filename="$EEZY_FOLDER/$1"
-	if [ !-f $filename ]; then
+	if [ ! -f $filename ]; then
 		echo "Cannot edit task: task with name '$1' doesn't exist!"
 		exit 0
 	else
@@ -75,11 +75,13 @@ run_task() {
 	fi
 	local filename="$EEZY_FOLDER/$1"
 	echo "Eezy - Running task '$1'"
-	SECONDS=0
+	TIMENOW=$SECONDS
 	if [ -f $filename ]; then
+		local TASK_NAME="$1"
 		source $filename
 	fi
-	echo "Eezy - finished running task '$1' in $SECONDS second(s)."
+	TOTAL_TIME = TIMENOW - $SECONDS
+	echo "Eezy - finished running task '$1' in $TOTAL_TIME second(s)."
 	exit 0
 }
 run() {

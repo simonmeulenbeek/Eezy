@@ -8,9 +8,15 @@ Eezy makes it easy to create and run simple tasks.
 
 ```shell
 project-folder>eezy init
+Initializing current directory as an Eezy folder.
+Finished initializing. Start adding tasks by using 'eezy add-task new-task'.
+Or use 'eezy help' for more information.
 project-folder>eezy add-task new-task
-project-folder>nano .eezy/new-task
+Task 'new-task' created.
+project-folder>eezy edit new-task
 project-folder>eezy new-task
+Eezy - Running task 'new-task'
+Eezy - finished running task 'new-task' in 0 second(s).
 ```
 
 
