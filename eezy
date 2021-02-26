@@ -1,0 +1,135 @@
+#!/bin/bash
+
+PROJECT_FOLDER=$(pwd)
+EEZY_FOLDER="${PROJECT_FOLDER}/.eezy"
+
+not_initialized(){
+	echo "Current directory is not an Eezy folder."
+	echo "use 'eezy init' to initialize Eezy in this folder."
+	exit 0
+}
+initialize() {
+	if [ -d "$EEZY_FOLDER" ]; then 
+		echo "Current directory is already an Eezy folder!"
+		exit 0
+	fi
+	echo "Initializing current directory as an Eezy folder."
+	mkdir $EEZY_FOLDER
+	echo "Finished initializing. Start adding tasks by using '$0 add-task name-of-new-task'."
+	echo "Or use 'eezy help' for more information."
+	exit 0
+}
+error() {
+	echo "Use 'eezy help' for information on how to Eezy"
+	exit 0
+}
+help () {
+	echo "Eezy - Help."
+	echo "Available commands are:"
+	echo "		help"
+	echo "		init"
+	echo "		list"
+	echo "		add-task"
+	echo "		edit"
+	echo "Use 'eezy' followed by a command or task-name to run that function."
+    echo "	e.g.: eezy help"
+	exit 0
+}
+list_tasks() {
+	echo "Eezy - List tasks"
+	for entry in "$EEZY_FOLDER"/*
+	do
+		echo " - $entry"
+	done
+	exit 0
+}
+edit_task() {
+	if [ -z "$1" ]; then
+		error
+	fi
+	local filename="$EEZY_FOLDER/$1"
+	if [ !-f $filename ]; then
+		echo "Cannot edit task: task with name '$1' doesn't exist!"
+		exit 0
+	else
+		echo "Editing task '$1'"
+		nano $filename
+		exit 0
+	fi
+}
+add_task() {
+	if [ -z "$1" ]; then
+		error
+	fi
+	local filename="$EEZY_FOLDER/$1"
+	if [ -f $filename ]; then
+		echo "Cannot create task: task with name '$1' already exists!"
+	else
+		touch $filename
+		echo "Task '$1' created."
+	fi
+}
+run_task() {
+	if [ -z "$1" ]; then
+		error
+	fi
+	local filename="$EEZY_FOLDER/$1"
+	echo "Eezy - Running task '$1'"
+	SECONDS=0
+	if [ -f $filename ]; then
+		source $filename
+	fi
+	echo "Eezy - finished running task '$1' in $SECONDS second(s)."
+	exit 0
+}
+run() {
+	if [ -z "$1" ]; then
+		error
+	fi
+	local filename="$EEZY_FOLDER/$1"
+	if [ -f $filename ]; then
+		run_task $1
+	else
+		echo "Task with name '$1' does not exist!"
+		echo "You can add this task by using the command 'eezy add-task $1'"
+		error
+	fi
+}
+check_initialization() {
+	if [ ! -d "$EEZY_FOLDER" ]; then 
+		not_initialized		
+	fi
+}
+
+if [ $# -eq 0 ]
+	then
+		error
+fi
+
+case "$1" in
+	"help")
+		help
+		;;
+	
+	"init")
+		initialize
+		;;
+	
+	"list")
+		check_initialization
+		list_tasks
+		;;
+	
+	"add-task")
+		add_task $2
+		;;
+	
+	"edit")
+		edit_task $2
+		;;
+	
+	*)
+		check_initialization
+		run $1
+		;;
+esac
