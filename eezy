@@ -37,9 +37,9 @@ help () {
 }
 list_tasks() {
 	echo "Eezy - List tasks"
-	for entry in "$EEZY_FOLDER"/*
+	for entry in "${EEZY_FOLDER}"/*
 	do
-		echo " - $entry"
+		echo " - $(basename -- "$entry")"
 	done
 	exit 0
 }
