@@ -1,6 +1,15 @@
 # Eezy
 Eezy is a super simple project automation system for ***all*** your projects. 
 
+```shell
+~/project-folder$ eezy init
+~/project-folder$ eezy add-task new-task
+~/project-folder$ eezy edit new-task
+~/project-folder$ eezy new-task
+Eezy - Running task 'new-task'
+Eezy - finished running task 'new-task' in 0 second(s).
+```
+
 When developing software I often find myself repeating the same commands everytime I want to run, test or deploy something. Creating scriptfiles is often my solution, but I tend to forget about these when returning to work on older projects. Eezy eliminates this problem by standardizing the way of creating and running these scripts ('tasks'). Eezy stores tasks in a standardized location, so it's super easy to either commit or .gitignore your tasks. 
 
 ## Table of Contents
