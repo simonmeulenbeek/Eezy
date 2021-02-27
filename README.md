@@ -36,10 +36,6 @@ To install Eezy, download and unpackage the latest Eezy release, and move `eezy`
 ~ $ cp ./eezy ~/.local/bin
 ```
 
-Since Eezy is just a shell script, *installation* in this context means simply moving `eezy` to a location that's included in PATH. For this reason it's very easy to install manually if you don't want to use the included install task for some reason. 
-Just add `eezy` to any folder that is in PATH, or add it's containing folder to PATH.
-
-
 ## Usage
 Eezy is a command line application. To start adding and running tasks you need to first navigate to your directory and enable Eezy. You can enable Eezy in your current directory by using `eezy init` . You can add tasks with `eezy add-task taskname` . You can run tasks with `eezy taskname` . Look below for an example and a full list of available commands. 
 
