@@ -2,10 +2,10 @@
 Eezy is a super simple project automation system for ***all*** your projects. 
 
 ```shell
-~$ eezy init
-~$ eezy add-task new-task
-~$ eezy edit new-task
-~$ eezy new-task
+~ $ eezy init
+~ $ eezy add-task new-task
+~ $ eezy edit new-task
+~ $ eezy new-task
 Eezy - Running task 'new-task'
 Eezy - finished running task 'new-task' in 0 second(s).
 ```
