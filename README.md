@@ -50,14 +50,14 @@ Eezy is a command line application. To start adding and running tasks you need t
 
 **example**
 ```shell
-~/project-folder$ eezy init
+~/project-folder $ eezy init
 Initializing current directory as an Eezy folder.
 Finished initializing. Start adding tasks by using 'eezy add-task new-task'.
 Or use 'eezy help' for more information.
-~/project-folder$ eezy add-task new-task
+~/project-folder $ eezy add-task new-task
 Task 'new-task' created.
-~/project-folder$ eezy edit new-task
-~/project-folder$ eezy new-task
+~/project-folder $ eezy edit new-task
+~/project-folder $ eezy new-task
 Eezy - Running task 'new-task'
 Eezy - finished running task 'new-task' in 0 second(s).
 ```
@@ -81,7 +81,7 @@ Tasks are bash-files that live in the `.eezy` folder of a specific directory. Wh
 
 Enabling Eezy in a directory means the creation of an `.eezy` folder. Eezy makes this easy with `eezy init`
 ```shell
-~/project-folder$ eezy init
+~/project-folder $ eezy init
 Initializing current directory as an Eezy folder.
 Finished initializing. Start adding tasks by using 'eezy add-task new-task'.
 Or use 'eezy help' for more information.
@@ -89,13 +89,13 @@ Or use 'eezy help' for more information.
 
 To create a new task you can either use `eezy add-task` or manually create a new file in the `.eezy` folder. The filename will be the name of the new task.
 ```shell
-~/project-folder$ eezy add-task a-new-task
+~/project-folder $ eezy add-task a-new-task
 Created new task 'a-new-task'
 ```
 
 To edit your task either use `eezy edit` or edit the file in the `.eezy` folder using a texteditor.
 ```shell
-~/project-folder$ eezy edit a-new-task
+~/project-folder $ eezy edit a-new-task
 ```
 **NB**: `eezy edit` uses the prefered editor set by `$VISUAL` or `$EDITOR`. It falls back on nano if those aren't set. 
 
