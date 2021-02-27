@@ -53,7 +53,7 @@ edit_task() {
 		exit 0
 	else
 		echo "Editing task '$1'"
-		nano $filename
+		${VISUAL:-${EDITOR:-nano}} $filename
 		exit 0
 	fi
 }
@@ -70,19 +70,11 @@ add_task() {
 	fi
 }
 run_task() {
-	if [ -z "$1" ]; then
-		error
-	fi
-	local filename="$EEZY_FOLDER/$1"
-	echo "Eezy - Running task '$1'"
-	TIMENOW=$SECONDS
-	if [ -f $filename ]; then
+	if [ -f "$2" ]; then
 		local TASK_NAME="$1"
-		source $filename
+		source "$2"
 	fi
-	TOTAL_TIME = TIMENOW - $SECONDS
-	echo "Eezy - finished running task '$1' in $TOTAL_TIME second(s)."
-	exit 0
+	
 }
 run() {
 	if [ -z "$1" ]; then
@@ -90,7 +82,12 @@ run() {
 	fi
 	local filename="$EEZY_FOLDER/$1"
 	if [ -f $filename ]; then
-		run_task $1
+		echo "Eezy - Running task '$1'"
+		local TIMESTART="$SECONDS"
+		run_task $1 $filename
+		TOTAL_TIME=`expr $SECONDS - $TIMESTART`
+		echo "Eezy - finished running task '$1' in $TOTAL_TIME second(s)."
+		exit 0
 	else
 		echo "Task with name '$1' does not exist!"
 		echo "You can add this task by using the command 'eezy add-task $1'"
