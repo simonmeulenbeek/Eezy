@@ -27,13 +27,13 @@ The fact that tasks in Eezy are simple bash scripts makes them:
 By using certain conventions we can extend the power and usefulness of these simple scripts. For example, by sourcing the task-scripts into Eezy itself, variables become available to the tasks itself.
 
 ## Installation
-To install Eezy, download and unpackage the latest Eezy release, and run `eezy install`. By default, Eezy will be placed in the current user's `~/.local/bin`
+To install Eezy, download and unpackage the latest Eezy release, and move `eezy` to a directory that's included in PATH, e.g. `~/.local/bin` .
 
 ```shell
-~ $ wget [url] eezy.zip 
-~ $ unzip eezy.zip eezy
+~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.0/eezy-v1.0.zip
+~ $ unzip eezy-v1.0.zip -d eezy
 ~ $ cd eezy
-~ $ ./eezy install
+~ $ cp ./eezy ~/.local/bin
 ```
 
 Since Eezy is just a shell script, *installation* in this context means simply moving `eezy` to a location that's included in PATH. For this reason it's very easy to install manually if you don't want to use the included install task for some reason. 
