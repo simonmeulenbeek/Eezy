@@ -1,0 +1,31 @@
+DEFAULT_PATH=~/.local/bin
+is_valid_dir() {
+    eval path=$1
+    ls_result=`ls -ld $path`
+    if [[ ${ls_result:0:1} == d ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+install() {
+    eval path=$1
+    echo "Installing Eezy to $path"
+    cp $PROJECT_FOLDER/eezy $path
+}
+echo "You're about to install Eezy. Make sure you choose a directory that is included in PATH."
+echo "Please enter path to preferred install directory. Make sure it exists!"
+echo "Leave empty to use the default. Ctrl+C to exit."
+while true; do
+    read -p "install directory($DEFAULT_PATH):" userpath
+    if [[ -z $userpath ]]; then
+        path="$DEFAULT_PATH"
+    elif is_valid_dir $userpath; then
+        path="$userpath"
+    else
+        echo "ERROR: The path you've entered is not a directory!"
+        continue
+    fi
+    break
+done
+install $path
