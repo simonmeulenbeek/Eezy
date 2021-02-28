@@ -30,9 +30,8 @@ By using certain conventions we can extend the power and usefulness of these sim
 Since v1.1 Eezy comes with a handy install task included in the release. 
 
 ```shell
-~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.0/eezy-v1.0.zip
-~ $ unzip eezy-v1.0.zip -d eezy
-~ $ cd eezy
+~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.1/eezy.zip
+~ $ unzip eezy.zip
 ~ $ ./eezy install
 ```
 
@@ -40,8 +39,7 @@ To install Eezy manually, download and unpackage the latest Eezy release, and mo
 
 ```shell
 ~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.0/eezy-v1.0.zip
-~ $ unzip eezy-v1.0.zip -d eezy
-~ $ cd eezy
+~ $ unzip eezy-v1.0.zip
 ~ $ cp eezy ~/.local/bin
 ```
 
