@@ -27,13 +27,22 @@ The fact that tasks in Eezy are simple bash scripts makes them:
 By using certain conventions we can extend the power and usefulness of these simple scripts. For example, by sourcing the task-scripts into Eezy itself, variables become available to the tasks itself.
 
 ## Installation
-To install Eezy, download and unpackage the latest Eezy release, and move `eezy` to a directory that's included in PATH, e.g. `~/.local/bin` .
+Since v1.1 Eezy comes with a handy install task included in the release. 
 
 ```shell
 ~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.0/eezy-v1.0.zip
 ~ $ unzip eezy-v1.0.zip -d eezy
 ~ $ cd eezy
-~ $ cp ./eezy ~/.local/bin
+~ $ ./eezy install
+```
+
+To install Eezy manually, download and unpackage the latest Eezy release, and move `eezy` to a directory that's included in PATH, e.g. `~/.local/bin` .
+
+```shell
+~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.0/eezy-v1.0.zip
+~ $ unzip eezy-v1.0.zip -d eezy
+~ $ cd eezy
+~ $ cp eezy ~/.local/bin
 ```
 
 ## Usage
