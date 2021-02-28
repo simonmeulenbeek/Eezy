@@ -1,0 +1,2 @@
+rm eezy.zip
+zip eezy.zip ./eezy ./README.md ./.eezy/install
