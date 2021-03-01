@@ -12,14 +12,15 @@ Eezy - finished running task 'new-task' in 0 second(s).
 
 When developing software I often find myself repeating the same commands everytime I want to run, test or deploy something. Creating scriptfiles is often my solution, but I tend to forget about these when returning to work on older projects. Eezy eliminates this problem by standardizing the way of creating and running these scripts ('tasks'). Eezy stores tasks in a standardized location, so it's super easy to either commit or .gitignore your tasks. 
 
-## Table of Contents
+### Table of Contents
 - [Eezy](#eezy)
-  - [Table of Contents](#table-of-contents)
+    - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Installation](#installation)
   - [Usage](#usage)
     - [CLI Options](#cli-options)
   - [Technical details](#technical-details)
+      - [Changelog](#changelog)
     - [Eezy](#eezy-1)
     - [Tasks](#tasks)
   - [Contributing](#contributing)
@@ -39,7 +40,7 @@ By using certain conventions we can extend the power and usefulness of these sim
 Since v1.1 Eezy comes with a handy install task included in the release. 
 
 ```shell
-~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.1/eezy.zip
+~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.2/eezy.zip
 ~ $ unzip eezy.zip
 ~ $ ./eezy install
 ```
@@ -47,8 +48,8 @@ Since v1.1 Eezy comes with a handy install task included in the release.
 To install Eezy manually, download and unpackage the latest Eezy release, and move `eezy` to a directory that's included in PATH, e.g. `~/.local/bin` .
 
 ```shell
-~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.0/eezy-v1.0.zip
-~ $ unzip eezy-v1.0.zip
+~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.2/eezy.zip
+~ $ unzip eezy.zip
 ~ $ cp eezy ~/.local/bin
 ```
 
@@ -70,10 +71,11 @@ Eezy - finished running task 'new-task' in 0 second(s).
 ```
 
 ### CLI Options
-Eezy comes with 5 built in commands.
+Eezy comes with 6 built in commands.
 * `eezy help` - List available built-in commands.
-* `eezy list` - List available tasks.
+* `eezy version` - Shows Eezy version
 * `eezy init` - Intialize Eezy in the current directory.
+* `eezy list` - List available tasks.
 * `eezy add-task [taskname]` - Create a new Eezy task in this directory. 
 * `eezy edit [taskname]` - Edit an existing Eezy task (using editor set as $EDITOR variable).
   
@@ -83,6 +85,13 @@ After adding tasks you can run them by simply invoking eezy followed by a taskna
 
 
 ## Technical details
+
+#### Changelog
+
+* 1.2 - Tasks Parameters
+* 1.1 - Add Install Script
+* 1.0 - Initial release
+
 ### Eezy
 Tasks are bash-files that live in the `.eezy` folder of a specific directory. When running a task with Eezy, Eezy looks for the task in the `.eezy` directory in the current folder. Note that this means that Eezy tasks are only available to that specific folder. 
 
@@ -108,14 +117,7 @@ To edit your task either use `eezy edit` or edit the file in the `.eezy` folder 
 
 ### Tasks
 
-Tasks are normal bash files except for a few key differences:
-* They don't require a shebang at the start of the file (i.e. `#!/bin/bash`).
-* Task files have access to Eezy global variables.
-
-The full list of default available variables is:
-* **PROJECT_FOLDER** - Path of current working directory
-* **EEZY_FOLDER** - Path of `.eezy` folder
-* **TASK_NAME** - Name of the current running task.
+Moved, see [Tasks](Tasks.md)
 
 
 ## Contributing

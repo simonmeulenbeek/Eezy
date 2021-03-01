@@ -1,8 +1,13 @@
 #!/bin/bash
 
+EEZY_VERSION="v1.2"
 PROJECT_FOLDER=$(pwd)
 EEZY_FOLDER="${PROJECT_FOLDER}/.eezy"
 
+print_version() {
+	echo "Eezy $EEZY_VERSION"
+	exit 0
+}
 not_initialized(){
 	echo "Current directory is not an Eezy folder."
 	echo "use 'eezy init' to initialize Eezy in this folder."
@@ -27,6 +32,7 @@ help () {
 	echo "Eezy - Help."
 	echo "Available commands are:"
 	echo "		help"
+	echo "		version"
 	echo "		init"
 	echo "		list"
 	echo "		add-task"
@@ -72,9 +78,10 @@ add_task() {
 run_task() {
 	if [ -f "$2" ]; then
 		local TASK_NAME="$1"
-		source "$2"
+		local TASK_PATH="$2"
+		shift; shift; shift;
+		source $TASK_PATH
 	fi
-	
 }
 run() {
 	if [ -z "$1" ]; then
@@ -84,7 +91,7 @@ run() {
 	if [ -f $filename ]; then
 		echo "Eezy - Running task '$1'"
 		local TIMESTART="$SECONDS"
-		run_task $1 $filename
+		run_task $1 $filename "$@"
 		TOTAL_TIME=`expr $SECONDS - $TIMESTART`
 		echo "Eezy - finished running task '$1' in $TOTAL_TIME second(s)."
 		exit 0
@@ -106,6 +113,10 @@ if [ $# -eq 0 ]
 fi
 
 case "$1" in
+	"version")
+		print_version
+		;;
+	
 	"help")
 		help
 		;;
@@ -129,6 +140,6 @@ case "$1" in
 	
 	*)
 		check_initialization
-		run $1
+		run "$@"
 		;;
 esac
