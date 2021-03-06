@@ -25,7 +25,7 @@ case "${kernelname}" in
         ;;
 esac
 is_valid_dir() {
-    eval path=$1
+    path="${1/#\~/$HOME}"
     ls_result=`ls -ld $path`
     if [[ ${ls_result:0:1} == d ]]; then
         return 0
@@ -34,7 +34,7 @@ is_valid_dir() {
     fi
 }
 install() {
-    eval path=$1
+    path="${1/#\~/$HOME}"
     echo "Installing Eezy to $path"
     cp $PROJECT_FOLDER/eezy $path
 }
