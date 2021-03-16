@@ -14,12 +14,8 @@ When developing software I often find myself repeating the same commands everyti
 
 ### Changelog
 
-<<<<<<< HEAD
-* 1.2 - Tasks Parameters
-=======
 * 1.3 - Editor argument, removal of `eval`, improved install task on MacOS
 * 1.2 - Tasks Parameters, add [Tasks.md](Tasks.md)
->>>>>>> master
 * 1.1 - Add Install Script
 * 1.0 - Initial release
 
