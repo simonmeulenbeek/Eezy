@@ -1,6 +1,31 @@
-DEFAULT_PATH=~/.local/bin
+DEFAULT_PATH_LINUX=~/.local/bin
+DEFAULT_PATH_MAC=/usr/local/bin
+DEFAULT_PATH=
+PROVIDED_PATH="$1"
+kernelname="$(uname -s)"
+check_write_permission() {
+    if [[ -w "$1" ]]; then
+        return 1
+    else
+        return 0
+    fi
+}
+case "${kernelname}" in
+    Linux*)
+        OS=Linux     
+        DEFAULT_PATH=$DEFAULT_PATH_LINUX
+        ;;
+    Darwin*)
+        OS=MacOS
+        DEFAULT_PATH=$DEFAULT_PATH_MAC
+        ;;
+    *)
+        echo "Error! Only Linux, MacOS and WSL is supported for now. Please create a Github Issue if you ever see this error!"
+        exit 1
+        ;;
+esac
 is_valid_dir() {
-    eval path=$1
+    path="${1/#\~/$HOME}"
     ls_result=`ls -ld $path`
     if [[ ${ls_result:0:1} == d ]]; then
         return 0
@@ -9,12 +34,12 @@ is_valid_dir() {
     fi
 }
 install() {
-    eval path=$1
+    path="${1/#\~/$HOME}"
     echo "Installing Eezy to $path"
     cp $PROJECT_FOLDER/eezy $path
 }
-echo "You're about to install Eezy. Make sure you choose a directory that is included in PATH."
-echo "Please enter path to preferred install directory. Make sure it exists!"
+echo "You're about to install Eezy. Detected operating system is $OS."
+echo "Please enter path to install directory. Make sure it exists and is in PATH!"
 echo "Leave empty to use the default. Ctrl+C to exit."
 while true; do
     read -p "install directory($DEFAULT_PATH):" userpath

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EEZY_VERSION="v1.2"
+EEZY_VERSION="v1.3"
 PROJECT_FOLDER=$(pwd)
 EEZY_FOLDER="${PROJECT_FOLDER}/.eezy"
 
@@ -29,20 +29,20 @@ error() {
 	exit 0
 }
 help () {
-	echo "Eezy - Help."
+	echo "Eezy - Help"
 	echo "Available commands are:"
-	echo "		help"
-	echo "		version"
-	echo "		init"
-	echo "		list"
-	echo "		add-task"
-	echo "		edit"
+	echo "	help				- List available commands"
+	echo "	version				- Display Eezy version info"
+	echo "	init				- Enable Eezy in the current folder"
+	echo "	list				- List available Eezy tasks"
+	echo "	add-task [taskname]		- Add new Eezy task"
+	echo "	edit [taskname] [editor]	- Edit an existing Eezy task, editor argument is optional."
 	echo "Use 'eezy' followed by a command or task-name to run that function."
     echo "	e.g.: eezy help"
 	exit 0
 }
 list_tasks() {
-	echo "Eezy - List tasks"
+	echo "Eezy - Available tasks"
 	for entry in "${EEZY_FOLDER}"/*
 	do
 		echo " - $(basename -- "$entry")"
@@ -50,6 +50,7 @@ list_tasks() {
 	exit 0
 }
 edit_task() {
+	local DETECT_RM_REGEX="(\s|;\s*)+rm(\s|;)*|^rm(\s|;)+|^rm$"
 	if [ -z "$1" ]; then
 		error
 	fi
@@ -59,6 +60,19 @@ edit_task() {
 		exit 0
 	else
 		echo "Editing task '$1'"
+		shift
+		if [ ! -z "$1" ]; then
+			if ! command -v "$*" &> /dev/null
+			then
+				echo "Couldn't find an editor with the name '${*}'."
+				exit 1
+			elif [[ "$*" =~ $DETECT_RM_REGEX ]]; then
+				echo "Detected 'rm' command! Aborting!"
+				exit 1
+			fi
+			$1 $filename
+			exit 0
+		fi
 		${VISUAL:-${EDITOR:-nano}} $filename
 		exit 0
 	fi
@@ -135,7 +149,7 @@ case "$1" in
 		;;
 	
 	"edit")
-		edit_task $2
+		edit_task $2 $3
 		;;
 	
 	*)
