@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EEZY_VERSION="v1.2"
+EEZY_VERSION="v1.3"
 PROJECT_FOLDER=$(pwd)
 EEZY_FOLDER="${PROJECT_FOLDER}/.eezy"
 

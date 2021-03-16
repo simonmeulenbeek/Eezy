@@ -14,7 +14,12 @@ When developing software I often find myself repeating the same commands everyti
 
 ### Changelog
 
+<<<<<<< HEAD
 * 1.2 - Tasks Parameters
+=======
+* 1.3 - Editor argument, removal of `eval`, improved install task on MacOS
+* 1.2 - Tasks Parameters, add [Tasks.md](Tasks.md)
+>>>>>>> master
 * 1.1 - Add Install Script
 * 1.0 - Initial release
 
@@ -46,7 +51,7 @@ By using certain conventions we can extend the power and usefulness of these sim
 Since v1.1 Eezy comes with a handy install task included in the release. 
 
 ```shell
-~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.2/eezy.zip
+~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.3/eezy.zip
 ~ $ unzip eezy.zip
 ~ $ ./eezy install
 ```
@@ -54,7 +59,7 @@ Since v1.1 Eezy comes with a handy install task included in the release.
 To install Eezy manually, download and unpackage the latest Eezy release, and move `eezy` to a directory that's included in PATH, e.g. `~/.local/bin` .
 
 ```shell
-~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.2/eezy.zip
+~ $ wget https://github.com/simonmeulenbeek/Eezy/releases/download/v1.3/eezy.zip
 ~ $ unzip eezy.zip
 ~ $ cp eezy ~/.local/bin
 ```
