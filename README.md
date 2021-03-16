@@ -12,15 +12,21 @@ Eezy - finished running task 'new-task' in 0 second(s).
 
 When developing software I often find myself repeating the same commands everytime I want to run, test or deploy something. Creating scriptfiles is often my solution, but I tend to forget about these when returning to work on older projects. Eezy eliminates this problem by standardizing the way of creating and running these scripts ('tasks'). Eezy stores tasks in a standardized location, so it's super easy to either commit or .gitignore your tasks. 
 
+### Changelog
+
+* 1.2 - Tasks Parameters
+* 1.1 - Add Install Script
+* 1.0 - Initial release
+
 ### Table of Contents
 - [Eezy](#eezy)
+    - [Changelog](#changelog)
     - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Installation](#installation)
   - [Usage](#usage)
     - [CLI Options](#cli-options)
   - [Technical details](#technical-details)
-      - [Changelog](#changelog)
     - [Eezy](#eezy-1)
     - [Tasks](#tasks)
   - [Contributing](#contributing)
@@ -76,8 +82,8 @@ Eezy comes with 6 built in commands.
 * `eezy version` - Shows Eezy version
 * `eezy init` - Intialize Eezy in the current directory.
 * `eezy list` - List available tasks.
-* `eezy add-task [taskname]` - Create a new Eezy task in this directory. 
-* `eezy edit [taskname]` - Edit an existing Eezy task (using editor set as $EDITOR variable).
+* `eezy add-task [taskname]` - Create a new Eezy task for this directory. 
+* `eezy edit [taskname] [editor]` - Edit an existing Eezy task. The `[editor]` argument is optional. If no editor is given, it will use `$VISUAL`, `$EDITOR` or `nano` (in that order).
   
 After adding tasks you can run them by simply invoking eezy followed by a taskname. 
 
@@ -85,12 +91,6 @@ After adding tasks you can run them by simply invoking eezy followed by a taskna
 
 
 ## Technical details
-
-#### Changelog
-
-* 1.2 - Tasks Parameters
-* 1.1 - Add Install Script
-* 1.0 - Initial release
 
 ### Eezy
 Tasks are bash-files that live in the `.eezy` folder of a specific directory. When running a task with Eezy, Eezy looks for the task in the `.eezy` directory in the current folder. Note that this means that Eezy tasks are only available to that specific folder. 
@@ -113,7 +113,11 @@ To edit your task either use `eezy edit` or edit the file in the `.eezy` folder 
 ```shell
 ~/project-folder $ eezy edit a-new-task
 ```
-**NB**: `eezy edit` uses the prefered editor set by `$VISUAL` or `$EDITOR`. It falls back on nano if those aren't set. 
+**NB**: `eezy edit` uses the prefered editor set by `$VISUAL` or `$EDITOR`. It falls back on nano if those aren't set. Since version 1.3 you can also provide a preferred editor as an argument. If you need to provide some argument to your editor you need to enclose it within double-quotes.
+```shell
+~/project-folder $ eezy edit a-new-task code
+~/project-folder $ eezy edit a-new-task "code --argument-for-code --open-file"
+```
 
 ### Tasks
 
