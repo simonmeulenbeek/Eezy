@@ -31,18 +31,18 @@ error() {
 help () {
 	echo "Eezy - Help"
 	echo "Available commands are:"
-	echo "		help"
-	echo "		version"
-	echo "		init"
-	echo "		list"
-	echo "		add-task [taskname]"
-	echo "		edit [taskname] [editor]"
+	echo "	help				- List available commands"
+	echo "	version				- Display Eezy version info"
+	echo "	init				- Enable Eezy in the current folder"
+	echo "	list				- List available Eezy tasks"
+	echo "	add-task [taskname]		- Add new Eezy task"
+	echo "	edit [taskname] [editor]	- Edit an existing Eezy task, editor argument is optional."
 	echo "Use 'eezy' followed by a command or task-name to run that function."
     echo "	e.g.: eezy help"
 	exit 0
 }
 list_tasks() {
-	echo "Eezy - List tasks"
+	echo "Eezy - Available tasks"
 	for entry in "${EEZY_FOLDER}"/*
 	do
 		echo " - $(basename -- "$entry")"
