@@ -29,14 +29,14 @@ error() {
 	exit 0
 }
 help () {
-	echo "Eezy - Help."
+	echo "Eezy - Help"
 	echo "Available commands are:"
 	echo "		help"
 	echo "		version"
 	echo "		init"
 	echo "		list"
-	echo "		add-task"
-	echo "		edit"
+	echo "		add-task [taskname]"
+	echo "		edit [taskname] [editor]"
 	echo "Use 'eezy' followed by a command or task-name to run that function."
     echo "	e.g.: eezy help"
 	exit 0
@@ -50,6 +50,7 @@ list_tasks() {
 	exit 0
 }
 edit_task() {
+	local DETECT_RM_REGEX="(\s|;\s*)+rm(\s|;)*|^rm(\s|;)+|^rm$"
 	if [ -z "$1" ]; then
 		error
 	fi
@@ -59,6 +60,19 @@ edit_task() {
 		exit 0
 	else
 		echo "Editing task '$1'"
+		shift
+		if [ ! -z "$1" ]; then
+			if ! command -v "$*" &> /dev/null
+			then
+				echo "Couldn't find an editor with the name '${*}'."
+				exit 1
+			elif [[ "$*" =~ $DETECT_RM_REGEX ]]; then
+				echo "Detected 'rm' command! Aborting!"
+				exit 1
+			fi
+			$1 $filename
+			exit 0
+		fi
 		${VISUAL:-${EDITOR:-nano}} $filename
 		exit 0
 	fi
@@ -135,7 +149,7 @@ case "$1" in
 		;;
 	
 	"edit")
-		edit_task $2
+		edit_task $2 $3
 		;;
 	
 	*)
