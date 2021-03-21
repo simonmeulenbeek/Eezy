@@ -1,4 +1,7 @@
 # Eezy
+
+![demo](demo.gif)
+
 Eezy is a super simple project automation system for ***all*** your projects. 
 
 ```shell
