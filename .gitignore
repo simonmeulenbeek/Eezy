@@ -1,5 +1,5 @@
 # Releases
-/release/*.zip
+/release/
 # Exclude Eezy tasks except for install and create release
 **/.eezy/
 !/.eezy/install
