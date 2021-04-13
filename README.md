@@ -133,3 +133,5 @@ Please create a new Issue if you find any bug or problem while using Eezy. Also 
 
 Eezy is very accepting to forking and pull requests. Pull requests will be accepted if they fix bugs or increase usefulness, and don't include any dependencies.
 
+## License
+Eezy is licensed under GPLv2. See the [LICENSE file](./LICENSE) for the full license, or [GNU.org](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) for more information. 
