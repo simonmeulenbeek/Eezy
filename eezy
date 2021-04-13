@@ -1,4 +1,22 @@
 #!/bin/bash
+#
+# Eezy - easy script management
+# Copyright (C) 2021  Simon Meulenbeek <simonmeulenbeek@gmail.com>
+#
+#   This program is free software; you can redistribute it and/or
+#   modify it under the terms of the GNU General Public License
+#   as published by the Free Software Foundation; either version 2
+#   of the License, or (at your option) any later version.
+#   
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#   
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 
 EEZY_VERSION="v1.3"
 PROJECT_FOLDER=$(pwd)
@@ -14,7 +32,7 @@ not_initialized(){
 	exit 0
 }
 initialize() {
-	if [ -d "$EEZY_FOLDER" ]; then 
+	if [ -d "$EEZY_FOLDER" ]; then
 		echo "Current directory is already an Eezy folder!"
 		exit 0
 	fi
@@ -43,10 +61,17 @@ help () {
 }
 list_tasks() {
 	echo "Eezy - Available tasks"
-	for entry in "${EEZY_FOLDER}"/*
-	do
-		echo " - $(basename -- "$entry")"
-	done
+	local tasks="$EEZY_FOLDER/"*
+	local files=($tasks)
+	if [ "$tasks" == ${files[0]} ]
+	then
+		echo "  No tasks found! Add tasks 'eezy add-task [taskname]'."
+	else
+		for entry in $tasks
+		do
+			echo " - $(basename -- "$entry")"
+		done
+	fi
 	exit 0
 }
 edit_task() {
@@ -116,8 +141,8 @@ run() {
 	fi
 }
 check_initialization() {
-	if [ ! -d "$EEZY_FOLDER" ]; then 
-		not_initialized		
+	if [ ! -d "$EEZY_FOLDER" ]; then
+		not_initialized
 	fi
 }
 
@@ -130,28 +155,28 @@ case "$1" in
 	"version")
 		print_version
 		;;
-	
+
 	"help")
 		help
 		;;
-	
+
 	"init")
 		initialize
 		;;
-	
+
 	"list")
 		check_initialization
 		list_tasks
 		;;
-	
+
 	"add-task")
 		add_task $2
 		;;
-	
+
 	"edit")
 		edit_task $2 $3
 		;;
-	
+
 	*)
 		check_initialization
 		run "$@"
